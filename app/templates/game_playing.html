@@ -1,0 +1,53 @@
+<section class="main-container" ng-init="startGame()">
+	<h1 class="title">wor<span style="color:#cc0000">db</span>reaker</h1>
+	
+	<div ng-if="gameOver" class="stats container">
+		You got it after only {{gameOverStats.guesses}} guesses and {{gameOverStats.seconds}} seconds!
+	</div>
+
+	<section ng-if="!gameOver">
+		<div class="hint container">{{answerLength}} letter word</div>
+
+		<form class="guessForm" name="guessForm" ng-submit="guess()">
+			<input type="text" maxlength="{{answerLength}}" 
+						 class="guess-input container"
+						 required data-ng-model="userInput.guess"
+						 autocomplete="off"><br>
+			<button type="submit" class="guess-button" data-ng-disabled="guessForm.$invalid">Guess</button>
+		</form> 
+	</section>
+
+	<table class="guess-feedback">
+		<td ng-repeat="letter in guessFeedback track by $index" 
+				ng-class="setBGColorBasedOnStatus(letter)">
+			{{letter.name}}
+		</td>						
+	</table>
+</section>
+
+<table class="guess-history">
+	<tr ng-repeat="word in guessHistory">
+		<td ng-repeat="letter in word"
+				ng-class="setBGColorBasedOnStatus(letter)">
+			{{letter.name}}
+		</td>	
+	</tr>
+</table>
+
+<section class="untried-container" ng-if="afterFirstGuess">
+	<div class="untried-header">untried letters</div>
+	<div>
+    <div ng-repeat="letter in untriedLetters" class="untried-letters">
+    	{{letter}}
+    </div>
+  </div>
+</section>
+
+<form class="new-game container" ng-submit="playGame(); startGame()">
+	<label>Code:</label>
+	<input type="text" maxlength="5" 
+				 class="code-input" autocomplete="off" 
+				 ng-keyup="checkCode()" ng-model="userInput.code">
+	<button type="submit" class="start-button" data-ng-disabled="!validCode">New Game</button>
+</form>
+

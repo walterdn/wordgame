@@ -1,0 +1,22 @@
+<section class="main-container">
+	<h1 class="title">wor<span style="color:#cc0000">db</span>reaker</h1>
+	
+		<form name="answerForm" class="create-game container" ng-submit="createGame()">
+			<label>Answer:</label>
+  		<input type="text" maxlength="10" 
+  					 class="answer-input" autocomplete="off" 
+  					 required data-ng-model="userInput.answer">
+  		<button type="submit" class="start-button" data-ng-disabled="answerForm.$invalid">Create</button>
+		</form>
+
+		<div>{{info.text}}</div>
+
+		<form class="play-game container" ng-submit="playGame()">
+			<label>Code:</label>
+  		<input type="text" maxlength="5" ng-keyup="checkCode()"
+  					 class="answer-input" autocomplete="off" 
+  					 ng-model="userInput.code">
+  		<button type="submit" class="start-button" ng-disabled="!validCode">Play</button>
+		</form>
+		
+</section>
