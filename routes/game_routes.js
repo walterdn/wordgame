@@ -1,4 +1,4 @@
-var express = require('express');
+  var express = require('express');
 var bodyParser = require('body-parser').json();
 var Game = require(__dirname + '/../models/gameSchema');
 var handleError = require(__dirname + '/../lib/handle_server_error');

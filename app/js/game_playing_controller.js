@@ -1,28 +1,39 @@
 var Game = require('./../../models/game.js');
 
 module.exports = function(app) {
-app.controller('GamePlayingController', ['$scope', '$location', function($scope, $location) {
+app.controller('GamePlayingController', ['$scope', '$location', '$http', function($scope, $location, $http) {
 	
   var myGame;
 
-  $scope.startGame = function() {
-    if ($scope.answer) {
-      $scope.afterFirstGuess = false;
-      $scope.gameOver = false;
-      $scope.answerLength = $scope.answer.length;
-    	myGame = new Game();
-    	myGame.start($scope.answer);
-    	$scope.untriedLetters = myGame.getUntriedLetters();
-      $scope.guessFeedback = [];
-      $scope.guessHistory = [];
-    } else {
-      $location.path('/');
-    }
+  $scope.getCodeFromURL = function() {
+    var url = $location.url();
+
+    if (url.length > 1) { //if url contains more than just a slash
+      var code = url.substring(1, url.length); //removes the slash from beginning of url
+      $http.get('/fetch/' + code)
+        .then(function(res) {
+          if (res.data.length > 0) { //if code is not valid, res.data will be an empty array
+            var answer = res.data[0].answer;
+            startGame(answer);
+          } else {
+            $location.path('/');
+          }
+        });
+    } 
   };
 
-  $scope.setBGColorBasedOnStatus = function(letter) {
-  	return letter.status;
-  };
+  function startGame(answer) {
+    if (!answer) return;
+
+    $scope.afterFirstGuess = false;
+    $scope.gameOver = false;
+    $scope.answerLength = answer.length;
+  	myGame = new Game();
+  	myGame.start(answer);
+  	$scope.untriedLetters = myGame.getUntriedLetters();
+    $scope.guessFeedback = [];
+    $scope.guessHistory = [];
+  }
 
   $scope.guess = function() {
     $scope.afterFirstGuess = true;
@@ -37,6 +48,10 @@ app.controller('GamePlayingController', ['$scope', '$location', function($scope,
   	$scope.gameOverStats = myGame.getGameOverStats();
     if ($scope.gameOverStats) $scope.gameOver = true;
   }
+
+  $scope.setBGColorBasedOnStatus = function(letter) {
+    return letter.status;
+  };
 
 ////END OF CONTROLLER
 }]);

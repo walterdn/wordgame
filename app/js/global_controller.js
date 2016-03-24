@@ -11,24 +11,18 @@ app.controller('GlobalController', ['$scope', '$http', '$location', function($sc
         .then(function(res) {
           if (res.data.length > 0) { //if code is not valid, res.data will be an empty array
             $scope.validCode = true;
-            $scope.answer = res.data[0].answer;
           } else {
             $scope.validCode = false;
           } 
         });    
     }
-  }
+  };
 
   $scope.playGame = function() {
     var code = $scope.userInput.code.toLowerCase();
     $scope.userInput.code = null;
-
-    $http.get('/fetch/' + code)
-      .then(function(res) {
-        $scope.answer = res.data[0].answer;
-        $scope.validCode = false;
-        $location.path('/play');
-      });
+    $scope.validCode = false;
+    $location.path('/' + code);
   };
 
 ////END OF CONTROLLER BODY

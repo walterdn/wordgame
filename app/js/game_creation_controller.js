@@ -1,7 +1,7 @@
 var randomStringGenerator = require('./../../lib/random_string_generator.js');
 
 module.exports = function(app) {
-app.controller('GameCreationController', ['$scope', '$http', function($scope, $http) {
+app.controller('GameCreationController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	
   $scope.info = {};
 

@@ -1,23 +1,26 @@
 {
   "name": "wordbreaker",
   "version": "1.0.0",
+  "engines": {
+    "node": "0.12.7"
+  },
   "description": "A word guessing game",
   "main": "server.js",
   "dependencies": {
-    "webpack-stream": "^2.1.1"
+    "express": "^4.13.3",
+    "body-parser": "^1.14.2",
+    "mongoose": "^4.2.7"
   },
   "devDependencies": {
     "angular": "^1.4.8",
     "angular-route": "^1.4.8",
-    "body-parser": "^1.14.2",
-    "express": "^4.13.3",
-    "mongoose": "^4.2.7",
-    "webpack-stream": "^2.1.1"
+    "webpack-stream": "^2.1.1",
+    "gulp": "^3.9.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Walter Nicholas",
   "license": "ISC"
 }

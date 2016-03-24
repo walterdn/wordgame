@@ -13,11 +13,8 @@ wordBreakerApp.config(['$routeProvider', function($route) {
       templateUrl: '/templates/game_creation.html',
       controller: 'GameCreationController'
     })
-    .when('/play', {
+    .otherwise({
       templateUrl: '/templates/game_playing.html',
       controller: 'GamePlayingController'
-    })
-    .otherwise({
-      redirectTo: '/'
     })
 }]);

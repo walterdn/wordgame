@@ -13,6 +13,6 @@ app.use(express.static(__dirname + '/build'));
 app.use(gameRouter);
 
 app.listen(port, function() {
-  console.log('Server up.');
+  console.log('Server up on port ' + port);
 });
 
