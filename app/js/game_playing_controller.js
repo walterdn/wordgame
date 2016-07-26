@@ -9,11 +9,13 @@ app.controller('GamePlayingController', ['$scope', '$location', '$http', functio
     var url = $location.url();
 
     if (url.length > 1) { //if url contains more than just a slash
-      var code = url.substring(1, url.length); //removes the slash from beginning of url
+      // var code = url.substring(1, url.length); //removes the slash from beginning of url
+      var code = 7475;
       $http.get('/fetch/' + code)
         .then(function(res) {
           if (res.data.length > 0) { //if code is not valid, res.data will be an empty array
-            var answer = res.data[0].answer;
+            // var answer = res.data[0].answer;
+            var answer = 'hello';
             startGame(answer);
           } else {
             $location.path('/');
@@ -28,6 +30,8 @@ app.controller('GamePlayingController', ['$scope', '$location', '$http', functio
     $scope.afterFirstGuess = false;
     $scope.gameOver = false;
     $scope.answerLength = answer.length;
+    $scope.message = answer;
+    console.log($scope.message);
   	myGame = new Game();
   	myGame.start(answer);
   	$scope.untriedLetters = myGame.getUntriedLetters();

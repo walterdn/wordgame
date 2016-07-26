@@ -6,7 +6,7 @@
 	</div>
 
 	<section ng-if="!gameOver">
-		<div class="hint container">{{answerLength}} letter word</div>
+		<div class="hint container">{{message}}</div>
 
 		<form class="guessForm" name="guessForm" ng-submit="guess()">
 			<input type="text" maxlength="{{answerLength}}" 
